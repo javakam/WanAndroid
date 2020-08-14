@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="viewModel"
+            type="com.ando.wo.ui.WanAndroidViewModel" />
+
+        <variable
+            name="resId"
+            type="Integer" />
+
+        <variable
+            name="hasTabs"
+            type="Boolean" />
+    </data>
+
+    <!--    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout-->
+    <!--        android:id="@+id/swipeRefresh"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="match_parent"-->
+    <!--        bind:refreshing="@{viewModel.refreshing}"-->
+    <!--        bind:onRefreshListener="@{() -> viewModel.onRefresh()}"-->
+    <!--        bind:colorSchemeResources="@{resId}"-->
+    <!--        ></androidx.swiperefreshlayout.widget.SwipeRefreshLayout>-->
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tv_article_tabs"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text='@{"复杂的表达式显示结果  "+@string/app_name+" -> "  + viewModel.wxArticleTabs.size()}' />
+
+        <ImageView
+            android:id="@+id/iv_article_tabs_bind"
+            loadPic="@{viewModel.tempImageUrl}"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_marginTop="3dp"
+            android:scaleType="centerCrop" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_article_tabs"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="5dp"
+            android:clipToPadding="false"
+            app:isGone="@{!hasTabs}"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            tools:listitem="@layout/list_item_wx_article_tab" />
+
+    </LinearLayout>
+
+
+</layout>
