@@ -40,8 +40,13 @@
 
     <fragment
         android:id="@+id/read_fragment"
-        android:name="com.ando.wo.ui.ReaderFragment"
-        android:label="LabelRead">
+        android:name="com.ando.wo.ui.read.ReaderFragment"
+        android:label="LabelRead"
+        tools:layout="@layout/fragment_article_reader">
+
+        <argument
+            android:name="title"
+            app:argType="string" />
 
         <argument
             android:name="link"

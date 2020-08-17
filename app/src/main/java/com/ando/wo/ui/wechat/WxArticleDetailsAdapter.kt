@@ -50,15 +50,11 @@ class WxArticleDetailsAdapter : ListAdapter<Article, WxArticleDetailsAdapter.Vie
         init {
             binding.setClickListener { view ->
                 binding.viewModel?.articleLink?.let { link ->
-
-                    //Toast.makeText(view.context, "$articleId", Toast.LENGTH_SHORT).show()
-
                     val destination =
                         WxArticleDetailFragmentDirections.actionArticleDetailsFragmentToReadFragment(
-                            link
+                            binding.viewModel?.articleTitle ?: "", link
                         )
                     view.findNavController().navigate(destination)
-
                 }
             }
 

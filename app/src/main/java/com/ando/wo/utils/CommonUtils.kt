@@ -1,8 +1,11 @@
 package com.ando.wo.utils
 
+import android.app.Activity
 import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Context
+import android.content.Intent
+import androidx.core.app.ShareCompat
 import com.ando.wo.WanAndroidApplication
 
 /**
@@ -23,4 +26,14 @@ fun setClipDate(text: String?) {
             cm.primaryClip?.getItemAt(0)?.text
         }
     }
+}
+
+
+fun createShareIntent(activity: Activity, shareText: String?) {
+    val shareIntent = ShareCompat.IntentBuilder.from(activity)
+        .setText(shareText)
+        .setType("text/plain")
+        .createChooserIntent()
+        .addFlags(Intent.FLAG_ACTIVITY_NEW_DOCUMENT or Intent.FLAG_ACTIVITY_MULTIPLE_TASK)
+    activity.startActivity(shareIntent)
 }
