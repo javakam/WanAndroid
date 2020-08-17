@@ -1,4 +1,4 @@
-package com.ando.wo.ui
+package com.ando.wo.ui.wechat
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,6 +9,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import com.ando.wo.R
 import com.ando.wo.databinding.FragmentWxArticleTabsBinding
+import com.ando.wo.ui.WanAndroidViewModel
 import com.ando.wo.utils.InjectorUtil
 import kotlinx.coroutines.Job
 

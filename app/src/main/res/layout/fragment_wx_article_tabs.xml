@@ -35,19 +35,19 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/tv_article_tabs"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text='@{"复杂的表达式显示结果  "+@string/app_name+" -> "  + viewModel.wxArticleTabs.size()}' />
+<!--        <TextView-->
+<!--            android:id="@+id/tv_article_tabs"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text='@{"复杂的表达式显示结果  "+@string/app_name+" -> "  + viewModel.wxArticleTabs.size()}' />-->
 
-        <ImageView
-            android:id="@+id/iv_article_tabs_bind"
-            loadPic="@{viewModel.tempImageUrl}"
-            android:layout_width="35dp"
-            android:layout_height="35dp"
-            android:layout_marginTop="3dp"
-            android:scaleType="centerCrop" />
+<!--        <ImageView-->
+<!--            android:id="@+id/iv_article_tabs_bind"-->
+<!--            loadPic="@{viewModel.tempImageUrl}"-->
+<!--            android:layout_width="35dp"-->
+<!--            android:layout_height="35dp"-->
+<!--            android:layout_marginTop="3dp"-->
+<!--            android:scaleType="centerCrop" />-->
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_article_tabs"

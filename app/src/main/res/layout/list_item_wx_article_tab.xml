@@ -10,18 +10,15 @@
 
         <variable
             name="viewModel"
-            type="com.ando.wo.ui.WxArticleTabsItemViewModel" />
+            type="com.ando.wo.ui.wechat.WxArticleTabsItemViewModel" />
 
     </data>
 
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
-        android:layout_height="30dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginEnd="10dp"
-        android:layout_marginBottom="5dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="1dp"
         android:onClick="@{clickListener}"
-        android:padding="8dp"
         app:cardElevation="3dp"
         app:cardPreventCornerOverlap="false"
         app:shapeAppearanceOverlay="@style/ShapeAppearance.Sunflower.Card">
@@ -30,7 +27,10 @@
             android:id="@+id/tv_tab_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
             android:gravity="center"
+            android:minHeight="40dp"
+            android:padding="10dp"
             android:text="@{viewModel.tabName}"
             android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1" />
 

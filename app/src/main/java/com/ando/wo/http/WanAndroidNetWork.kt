@@ -1,5 +1,7 @@
 package com.ando.wo.http
 
+import com.ando.wo.bean.Article
+import com.ando.wo.bean.BasePage
 import com.ando.wo.bean.BaseResponse
 import com.ando.wo.bean.WxArticleTabsEntity
 import retrofit2.*
@@ -19,8 +21,14 @@ class WanAndroidNetWork {
 
     private val wanAndroidService = ServiceCreator.create(WanAndroidApiService::class.java)
 
-    suspend fun getWxArticleTabs(): BaseResponse<List<WxArticleTabsEntity>> =
+    suspend fun getWxArticleTabs(): BaseResponse<List<WxArticleTabsEntity>>? =
         wanAndroidService.getWxArticleTabs().await()
+
+    suspend fun getWxArticleDetail(
+        chapterId: String,
+        pageNumber: Int
+    ): BaseResponse<BasePage<List<Article>?>?>? =
+        wanAndroidService.getWxArticleDetail(chapterId, pageNumber).await()
 
     private suspend fun <T> Call<T>.await(): T {
         return suspendCoroutine { continuation ->

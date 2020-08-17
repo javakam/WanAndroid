@@ -1,7 +1,6 @@
-package com.ando.wo.ui
+package com.ando.wo.ui.wechat
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
@@ -48,6 +47,12 @@ class WxArticleTabsAdapter : ListAdapter<WxArticleTabsEntity, WxArticleTabsAdapt
 
                     Toast.makeText(view.context, "$tabId", Toast.LENGTH_SHORT).show()
 
+                    val destination =
+                        WxArticleFragmentDirections.actionWxArticleTabsFragmentToDetailFragment(
+                            tabId.toString()
+                        )
+                    view.findNavController().navigate(destination)
+
                 }
             }
         }
@@ -76,4 +81,12 @@ private class WxArticleTabsAdapterDiffCallback : DiffUtil.ItemCallback<WxArticle
     ): Boolean {
         return oldItem.name == newItem.name
     }
+}
+
+//ItemView.xml & Item
+class WxArticleTabsItemViewModel(tab: WxArticleTabsEntity) {
+
+    val tabId = tab.id
+    val tabName = tab.name
+
 }

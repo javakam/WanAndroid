@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    app:startDestination="@id/wx_article_tabs_fragment">
+
+    <fragment
+        android:id="@+id/wx_article_tabs_fragment"
+        android:name="com.ando.wo.ui.wechat.WxArticleFragment"
+        android:label="LabelTabList"
+        tools:layout="@layout/fragment_wx_article_tabs">
+
+        <action
+            android:id="@+id/action_wx_article_tabs_fragment_to_detail_fragment"
+            app:destination="@id/tab_detail_fragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/tab_detail_fragment"
+        android:name="com.ando.wo.ui.wechat.WxArticleDetailFragment"
+        android:label="LabelDetail"
+        tools:layout="@layout/fragment_wx_article_tabs_detail">
+        <argument
+            android:name="tabId"
+            app:argType="string" />
+    </fragment>
+
+
+</navigation>

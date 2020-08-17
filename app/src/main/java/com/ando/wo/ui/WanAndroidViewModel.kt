@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.ando.wo.WanAndroidApplication
+import com.ando.wo.bean.Article
 import com.ando.wo.bean.WxArticleTabsEntity
 import com.ando.wo.db.WanAndroidRepository
 import kotlinx.coroutines.Job
@@ -22,16 +23,24 @@ class WanAndroidViewModel internal constructor(private val repository: WanAndroi
     ViewModel() {
 
     val wxArticleTabs = MutableLiveData<List<WxArticleTabsEntity>>()
-
-    var tempImageUrl = MutableLiveData<String>()
+    val wxArticleDetails = MutableLiveData<List<Article>>()
 
     fun getWxArticleTabs(): Job =
         launch(
             {
                 wxArticleTabs.value = repository.getAllArticleTabs()
+            },
+            {
+                Toast.makeText(WanAndroidApplication.instance, it.message, Toast.LENGTH_SHORT)
+                    .show()
+            }
+        )
 
-                tempImageUrl.value =
-                    "https://www.qqwaw.com/upFiles/infoImg/coll/20170107/OT20170107111648672.jpg"
+
+    fun getWxArticleDetail(chapterId: String, pageNumber: Int): Job =
+        launch(
+            {
+                wxArticleDetails.value = repository.getArticleDetail(chapterId, pageNumber)
             },
             {
                 Toast.makeText(WanAndroidApplication.instance, it.message, Toast.LENGTH_SHORT)

@@ -3,6 +3,7 @@ package com.ando.wo.db
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.ando.wo.base.IRepository
+import com.ando.wo.bean.Article
 import com.ando.wo.bean.WxArticleTabsEntity
 import com.ando.wo.http.WanAndroidNetWork
 import kotlinx.coroutines.Dispatchers
@@ -13,6 +14,14 @@ class WanAndroidRepository private constructor(
     private val network: WanAndroidNetWork
 ) : IRepository {
 
+    private suspend fun requestAllArticleTabs() = withContext(Dispatchers.IO) {
+        network.getWxArticleTabs()?.data
+    }
+
+    private suspend fun requestArticleDetail(chapterId: String, pageNumber: Int): List<Article>? =
+        withContext(Dispatchers.IO) {
+            network.getWxArticleDetail(chapterId, pageNumber)?.data?.datas
+        }
 
     suspend fun getAllArticleTabs(): List<WxArticleTabsEntity>? {
         var tabs: List<WxArticleTabsEntity>? = wanAndroidDao.getAll()
@@ -20,9 +29,8 @@ class WanAndroidRepository private constructor(
         return tabs
     }
 
-    private suspend fun requestAllArticleTabs() = withContext(Dispatchers.IO) {
-        network.getWxArticleTabs().data
-    }
+    suspend fun getArticleDetail(chapterId: String, pageNumber: Int): List<Article>? =
+        requestArticleDetail(chapterId, pageNumber)
 
     companion object {
 

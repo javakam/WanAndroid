@@ -3,6 +3,7 @@ package com.ando.wo.db
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.room.*
+import com.ando.wo.bean.Article
 import com.ando.wo.bean.WxArticleTabsEntity
 
 /**
@@ -15,6 +16,8 @@ import com.ando.wo.bean.WxArticleTabsEntity
  */
 @Dao
 interface WanAndroidDao {
+
+    //Article Tabs
 
     @Query("select * from t_article_tabs order by tabId asc")
     suspend fun getAll(): List<WxArticleTabsEntity>?
@@ -33,5 +36,10 @@ interface WanAndroidDao {
 
     @Delete
     suspend fun delete(tab: WxArticleTabsEntity)
+
+
+    //Article
+//    @Query("select * from t_article_tabs order by tabId asc")
+//    suspend fun getAll(): List<Article>?
 
 }
