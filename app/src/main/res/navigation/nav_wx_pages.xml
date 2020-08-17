@@ -6,13 +6,13 @@
 
     <fragment
         android:id="@+id/wx_article_tabs_fragment"
-        android:name="com.ando.wo.ui.wechat.WxArticleFragment"
+        android:name="com.ando.wo.ui.wechat.WxArticleTabsFragment"
         android:label="LabelTabList"
         tools:layout="@layout/fragment_wx_article_tabs">
 
         <action
-            android:id="@+id/action_wx_article_tabs_fragment_to_detail_fragment"
-            app:destination="@id/tab_detail_fragment"
+            android:id="@+id/action_tabs_fragment_to_details_fragment"
+            app:destination="@id/article_details_fragment"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
@@ -20,14 +20,32 @@
     </fragment>
 
     <fragment
-        android:id="@+id/tab_detail_fragment"
+        android:id="@+id/article_details_fragment"
         android:name="com.ando.wo.ui.wechat.WxArticleDetailFragment"
         android:label="LabelDetail"
-        tools:layout="@layout/fragment_wx_article_tabs_detail">
+        tools:layout="@layout/fragment_wx_article_details">
+
+        <action
+            android:id="@+id/action_article_details_fragment_to_read_fragment"
+            app:destination="@id/read_fragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+
         <argument
             android:name="tabId"
             app:argType="string" />
     </fragment>
 
+    <fragment
+        android:id="@+id/read_fragment"
+        android:name="com.ando.wo.ui.ReaderFragment"
+        android:label="LabelRead">
+
+        <argument
+            android:name="link"
+            app:argType="string" />
+    </fragment>
 
 </navigation>

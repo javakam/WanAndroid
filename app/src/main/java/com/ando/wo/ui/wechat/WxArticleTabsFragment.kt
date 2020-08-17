@@ -21,7 +21,7 @@ import kotlinx.coroutines.Job
  * @author javakam
  * @date 2020/8/14  11:13
  */
-class WxArticleFragment : Fragment() {
+class WxArticleTabsFragment : Fragment() {
 
     private lateinit var binding: FragmentWxArticleTabsBinding
 
@@ -48,14 +48,11 @@ class WxArticleFragment : Fragment() {
         val adapter = WxArticleTabsAdapter()
         binding.rvArticleTabs.adapter = adapter
 
-        subscribeUi(adapter, binding)
+        subscribeUi(adapter)
         return binding.root
     }
 
-    private fun subscribeUi(
-        adapter: WxArticleTabsAdapter,
-        binding: FragmentWxArticleTabsBinding
-    ) {
+    private fun subscribeUi(adapter: WxArticleTabsAdapter) {
 
         jobWxArticleTabs?.cancel()
         jobWxArticleTabs = viewModel.getWxArticleTabs()

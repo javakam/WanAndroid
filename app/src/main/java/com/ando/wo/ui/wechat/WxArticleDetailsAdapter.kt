@@ -1,35 +1,40 @@
 package com.ando.wo.ui.wechat
 
+import android.content.ClipData
+import android.content.ClipboardManager
+import android.content.Context.CLIPBOARD_SERVICE
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.content.ContextCompat.getSystemService
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.ando.wo.R
-import com.ando.wo.bean.WxArticleTabsEntity
-import com.ando.wo.databinding.ListItemWxArticleTabBinding
+import com.ando.wo.bean.Article
+import com.ando.wo.databinding.ListItemWxArticleDetailBinding
 import com.ando.wo.utils.setClipDate
 
+
 /**
- * Title: WxArticleTabsAdapter
+ * Title: WxArticleDetailsAdapter
  * <p>
  * Description:
  * </p>
  * @author javakam
  * @date 2020/8/14  16:25
  */
-class WxArticleTabsAdapter : ListAdapter<WxArticleTabsEntity, WxArticleTabsAdapter.ViewHolder>(
-    WxArticleTabsAdapterDiffCallback()
+class WxArticleDetailsAdapter : ListAdapter<Article, WxArticleDetailsAdapter.ViewHolder>(
+    WxArticleDetailsAdapterDiffCallback()
 ) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
             DataBindingUtil.inflate(
                 LayoutInflater.from(parent.context),
-                R.layout.list_item_wx_article_tab, parent, false
+                R.layout.list_item_wx_article_detail, parent, false
             )
         )
     }
@@ -39,59 +44,63 @@ class WxArticleTabsAdapter : ListAdapter<WxArticleTabsEntity, WxArticleTabsAdapt
     }
 
     class ViewHolder(
-        private val binding: ListItemWxArticleTabBinding
+        private val binding: ListItemWxArticleDetailBinding
     ) : RecyclerView.ViewHolder(binding.root) {
 
         init {
             binding.setClickListener { view ->
-                binding.viewModel?.tabId?.let { tabId ->
+                binding.viewModel?.articleLink?.let { link ->
+
+                    //Toast.makeText(view.context, "$articleId", Toast.LENGTH_SHORT).show()
 
                     val destination =
-                        WxArticleTabsFragmentDirections.actionTabsFragmentToDetailsFragment(
-                            tabId.toString()
+                        WxArticleDetailFragmentDirections.actionArticleDetailsFragmentToReadFragment(
+                            link
                         )
                     view.findNavController().navigate(destination)
 
                 }
             }
 
-            binding.cardTabName.setOnLongClickListener {
-                setClipDate(binding.tvTabName.text.toString())
+            binding.cardArticleTitle.setOnLongClickListener {
+                setClipDate(binding.tvArticleTitle.text.toString())
                 Toast.makeText(it.context, "已复制", Toast.LENGTH_SHORT).show()
                 true
             }
         }
 
-        fun bind(tab: WxArticleTabsEntity) {
+        fun bind(article: Article) {
             with(binding) {
-                viewModel = WxArticleTabsItemViewModel(tab)
+                viewModel = WxArticleDetailItemViewModel(article)
                 executePendingBindings()
             }
         }
     }
 }
 
-private class WxArticleTabsAdapterDiffCallback : DiffUtil.ItemCallback<WxArticleTabsEntity>() {
+
+private class WxArticleDetailsAdapterDiffCallback : DiffUtil.ItemCallback<Article>() {
 
     override fun areItemsTheSame(
-        oldItem: WxArticleTabsEntity,
-        newItem: WxArticleTabsEntity
+        oldItem: Article,
+        newItem: Article
     ): Boolean {
         return oldItem.id == newItem.id
     }
 
     override fun areContentsTheSame(
-        oldItem: WxArticleTabsEntity,
-        newItem: WxArticleTabsEntity
+        oldItem: Article,
+        newItem: Article
     ): Boolean {
-        return oldItem.name == newItem.name
+        return oldItem.title == newItem.title
     }
 }
 
 //ItemView.xml & Item
-class WxArticleTabsItemViewModel(tab: WxArticleTabsEntity) {
+class WxArticleDetailItemViewModel(article: Article) {
 
-    val tabId = tab.id
-    val tabName = tab.name
+    val articleId = article.id
+    val articleTitle = article.title
+    val articleLink = article.link
 
 }

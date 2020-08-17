@@ -7,7 +7,7 @@
     <data>
 
         <variable
-            name="hasTabs"
+            name="hasArticles"
             type="Boolean" />
 
     </data>
@@ -16,13 +16,9 @@
         android:id="@+id/rv_article_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginStart="5dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="5dp"
         android:clipToPadding="false"
-        app:isGone="@{!hasTabs}"
+        app:isGone="@{!hasArticles}"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         tools:listitem="@layout/list_item_wx_article_tab" />
-
 
 </layout>

@@ -4,11 +4,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import androidx.navigation.fragment.navArgs
-import com.ando.wo.databinding.FragmentWxArticleTabsDetailBinding
+import com.ando.wo.databinding.FragmentWxArticleDetailsBinding
 import com.ando.wo.ui.WanAndroidViewModel
 import com.ando.wo.utils.InjectorUtil
 import kotlinx.coroutines.Job
@@ -27,7 +27,7 @@ class WxArticleDetailFragment : Fragment() {
         InjectorUtil.getWanAndroidViewModelFactory()
     }
 
-    private lateinit var binding: FragmentWxArticleTabsDetailBinding
+    private lateinit var binding: FragmentWxArticleDetailsBinding
     private val args: WxArticleDetailFragmentArgs by navArgs<WxArticleDetailFragmentArgs>()
     private var jobWxArticleDetail: Job? = null
 
@@ -36,18 +36,24 @@ class WxArticleDetailFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentWxArticleTabsDetailBinding.inflate(inflater, container, false)
+        binding = FragmentWxArticleDetailsBinding.inflate(inflater, container, false)
         binding.lifecycleOwner = this
 
-        Toast.makeText(requireActivity(), "${args.tabId}", Toast.LENGTH_LONG).show()
+        val adapter = WxArticleDetailsAdapter()
+        binding.rvArticleList.adapter = adapter
 
-        subscribeUi(args.tabId)
+        subscribeUi(adapter, args.tabId)
         return binding.root
     }
 
-    private fun subscribeUi(tabId: String) {
+    private fun subscribeUi(adapter: WxArticleDetailsAdapter, tabId: String) {
         jobWxArticleDetail?.cancel()
         jobWxArticleDetail = viewModel.getWxArticleDetail(tabId, 1)
+
+        viewModel.wxArticleDetails.observe(viewLifecycleOwner, Observer {
+            binding.hasArticles = !it.isNullOrEmpty()
+            adapter.submitList(it)
+        })
 
 
     }

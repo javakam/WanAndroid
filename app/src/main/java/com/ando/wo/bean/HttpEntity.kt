@@ -1,6 +1,5 @@
 package com.ando.wo.bean
 
-import android.graphics.Bitmap
 import androidx.room.*
 import com.google.gson.annotations.SerializedName
 
@@ -35,7 +34,6 @@ data class WxArticleTabsEntity(
     val children: List<Any>? = null
 }
 
-
 data class BasePage<T>(
     @SerializedName("datas") val datas: T?,
     @SerializedName("curPage") val curPage: Int? = 1,
@@ -46,7 +44,7 @@ data class BasePage<T>(
     @SerializedName("total") val total: Int? = 0
 )
 
-data class Article(
+data class Article (
     @SerializedName("apkLink") val apkLink: String,
     @SerializedName("audit") val audit: Int,
     @SerializedName("author") val author: String,
