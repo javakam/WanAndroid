@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.webkit.WebView
 import android.widget.FrameLayout
+import androidx.core.widget.NestedScrollView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.MutableLiveData
 import androidx.navigation.findNavController
@@ -41,6 +42,28 @@ class ReaderFragment : Fragment() {
         val settings = webView.settings
         settings.javaScriptEnabled = true
         binding.flReader.addView(webView)
+
+        var isToolbarShown = false
+        binding.scrollReader.setOnScrollChangeListener(
+            NestedScrollView.OnScrollChangeListener { _, _, scrollY, _, _ ->
+
+                // User scrolled past image to height of toolbar and the title text is
+                // underneath the toolbar, so the toolbar should be shown.
+                val shouldShowToolbar = scrollY > toolbar.height
+
+                // The new state of the toolbar differs from the previous state; update
+                // appbar and toolbar attributes.
+                if (isToolbarShown != shouldShowToolbar) {
+                    isToolbarShown = shouldShowToolbar
+
+                    // Use shadow animator to add elevation if toolbar is shown
+                    appbar.isActivated = shouldShowToolbar
+
+                    // Show the plant name if toolbar is shown
+                    binding.toolbarLayout.isTitleEnabled = shouldShowToolbar
+                }
+            }
+        )
 
         return binding.root
     }

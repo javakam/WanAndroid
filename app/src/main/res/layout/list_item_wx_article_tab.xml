@@ -24,7 +24,7 @@
         android:id="@+id/card_tab_name"
         app:cardElevation="3dp"
         app:cardPreventCornerOverlap="false"
-        app:shapeAppearanceOverlay="@style/ShapeAppearance.Sunflower.Card">
+        app:shapeAppearanceOverlay="@style/ShapeAppearance.WanAndroid.Card">
 
         <TextView
             android:id="@+id/tv_tab_name"

@@ -7,6 +7,7 @@ import androidx.room.RoomDatabase
 import androidx.room.migration.Migration
 import androidx.sqlite.db.SupportSQLiteDatabase
 import com.ando.wo.bean.WxArticleTabsEntity
+import com.ando.wo.utils.DATABASE_NAME
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
@@ -32,7 +33,7 @@ abstract class AppDatabase : RoomDatabase() {
             super.onOpen(db)
             INSTANCE?.let { database ->
                 scope?.launch {
-                    val userDao = database.wanAndroidDao()
+                    val wanAndroidDao = database.wanAndroidDao()
 
                     // Delete all content here.
                     //userDao.deleteAll()
@@ -82,16 +83,10 @@ abstract class AppDatabase : RoomDatabase() {
             }
             synchronized(this) {
                 val instance = Room.databaseBuilder(
-                    context.applicationContext,
-                    AppDatabase::class.java,
-                    "app_db"
+                    context.applicationContext, AppDatabase::class.java, DATABASE_NAME
                 )
                     //.addMigrations(MIGRATION_1_2)
-                    .addCallback(
-                        ArticleDatabaseCallback(
-                            scope
-                        )
-                    )
+                    .addCallback(ArticleDatabaseCallback(scope))
                     .build()
                 INSTANCE = instance
                 return instance

@@ -17,6 +17,10 @@ import com.ando.wo.WanAndroidApplication
  * @date 2020/8/17  14:52
  */
 
+
+fun noNull(s: String?): String = if (s.isNullOrBlank()) "" else s
+
+
 fun setClipDate(text: String?) {
     val cm: ClipboardManager? =
         WanAndroidApplication.instance.getSystemService(Context.CLIPBOARD_SERVICE) as? ClipboardManager?

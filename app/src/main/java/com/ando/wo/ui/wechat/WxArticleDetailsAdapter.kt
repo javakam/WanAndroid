@@ -16,6 +16,7 @@ import com.ando.wo.R
 import com.ando.wo.bean.Article
 import com.ando.wo.databinding.ListItemWxArticleDetailBinding
 import com.ando.wo.utils.setClipDate
+import com.ando.wo.utils.toReaderFragment
 
 
 /**
@@ -50,11 +51,7 @@ class WxArticleDetailsAdapter : ListAdapter<Article, WxArticleDetailsAdapter.Vie
         init {
             binding.setClickListener { view ->
                 binding.viewModel?.articleLink?.let { link ->
-                    val destination =
-                        WxArticleDetailFragmentDirections.actionArticleDetailsFragmentToReadFragment(
-                            binding.viewModel?.articleTitle ?: "", link
-                        )
-                    view.findNavController().navigate(destination)
+                    toReaderFragment(view, binding.viewModel?.articleTitle ?: "", link)
                 }
             }
 

@@ -12,6 +12,7 @@ import com.ando.wo.R
 import com.ando.wo.bean.WxArticleTabsEntity
 import com.ando.wo.databinding.ListItemWxArticleTabBinding
 import com.ando.wo.utils.setClipDate
+import com.ando.wo.utils.toArticleListFragment
 
 /**
  * Title: WxArticleTabsAdapter
@@ -45,13 +46,7 @@ class WxArticleTabsAdapter : ListAdapter<WxArticleTabsEntity, WxArticleTabsAdapt
         init {
             binding.setClickListener { view ->
                 binding.viewModel?.tabId?.let { tabId ->
-
-                    val destination =
-                        WxArticleTabsFragmentDirections.actionTabsFragmentToDetailsFragment(
-                            tabId.toString()
-                        )
-                    view.findNavController().navigate(destination)
-
+                    toArticleListFragment(view, tabId)
                 }
             }
 
