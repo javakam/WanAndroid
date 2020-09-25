@@ -8,5 +8,4 @@ package com.ando.wo.base
  * @author javakam
  * @date 2020/8/14  11:07
  */
-interface IRepository {
-}
+interface IRepository
