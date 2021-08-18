@@ -1,16 +1,9 @@
 package com.ando.wo.db
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.room.*
-import com.ando.wo.bean.Article
 import com.ando.wo.bean.WxArticleTabsEntity
 
 /**
- * Title: WanAndroidDao
- * <p>
- * Description:
- * </p>
  * @author javakam
  * @date 2020/8/13  16:58
  */
@@ -18,6 +11,7 @@ import com.ando.wo.bean.WxArticleTabsEntity
 interface WanAndroidDao {
 
     //Article Tabs
+    //BUG: https://stackoverflow.com/questions/48694449/error-with-room-dao-class-when-using-kotlin-coroutines
 
     @Query("select * from t_article_tabs order by tabId asc")
     suspend fun getAll(): List<WxArticleTabsEntity>?
@@ -25,7 +19,7 @@ interface WanAndroidDao {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun add(tab: WxArticleTabsEntity)
 
-    @Query("select * from t_article_tabs where  tabId in (:tabIds)")
+    @Query("select * from t_article_tabs where tabId in (:tabIds)")
     suspend fun loadAllByIds(tabIds: IntArray): List<WxArticleTabsEntity>?
 
     @Query("select * from t_article_tabs where tabName like :tabName limit 1")
