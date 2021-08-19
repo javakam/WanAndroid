@@ -1,11 +1,11 @@
 package com.ando.wo.ui.read
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.webkit.WebView
-import android.widget.FrameLayout
 import androidx.core.widget.NestedScrollView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.MutableLiveData
@@ -15,10 +15,6 @@ import com.ando.wo.databinding.FragmentArticleReaderBinding
 import kotlinx.android.synthetic.main.fragment_article_reader.*
 
 /**
- * Title: ReaderFragment
- * <p>
- * Description:
- * </p>
  * @author javakam
  * @date 2020/8/17  15:04
  */
@@ -26,15 +22,16 @@ class ReaderFragment : Fragment() {
 
     private lateinit var binding: FragmentArticleReaderBinding
     private lateinit var webView: WebView
-    private val args: ReaderFragmentArgs by navArgs<ReaderFragmentArgs>()
+    private val args: ReaderFragmentArgs by navArgs()
 
     private val imageUrl = MutableLiveData<String>()
 
+    @SuppressLint("SetJavaScriptEnabled")
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentArticleReaderBinding.inflate(inflater, container, false)
         binding.lifecycleOwner = this
 
@@ -74,7 +71,8 @@ class ReaderFragment : Fragment() {
         //toolbar.title = args.title
         binding.articleTitle = args.title
 
-        imageUrl.value = "https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=3922290090,3177876335&fm=26&gp=0.jpg"
+        imageUrl.value =
+            "https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=3922290090,3177876335&fm=26&gp=0.jpg"
         binding.imageUrl = imageUrl.value
 
         toolbar.setNavigationOnClickListener {

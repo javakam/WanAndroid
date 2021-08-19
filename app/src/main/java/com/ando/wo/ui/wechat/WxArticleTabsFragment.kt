@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
 import com.ando.wo.R
 import com.ando.wo.databinding.FragmentWxArticleTabsBinding
 import com.ando.wo.ui.WanAndroidViewModel
@@ -14,10 +13,6 @@ import com.ando.wo.utils.InjectorUtil
 import kotlinx.coroutines.Job
 
 /**
- * Title: WxArticleFragment
- * <p>
- * Description:
- * </p>
  * @author javakam
  * @date 2020/8/14  11:13
  */
@@ -36,14 +31,12 @@ class WxArticleTabsFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentWxArticleTabsBinding.inflate(inflater, container, false)
-
 
         binding.viewModel = viewModel
         binding.resId = R.color.colorPrimary
         binding.lifecycleOwner = this
-
 
         val adapter = WxArticleTabsAdapter()
         binding.rvArticleTabs.adapter = adapter
@@ -53,18 +46,16 @@ class WxArticleTabsFragment : Fragment() {
     }
 
     private fun subscribeUi(adapter: WxArticleTabsAdapter) {
-
         jobWxArticleTabs?.cancel()
         jobWxArticleTabs = viewModel.getWxArticleTabs()
 
         //xml databinding
-        viewModel.wxArticleTabs.observe(viewLifecycleOwner, Observer { tabs ->
+        viewModel.wxArticleTabs.observe(viewLifecycleOwner, { tabs ->
             binding.hasTabs = !tabs.isNullOrEmpty()
             adapter.submitList(tabs)
         })
 
         //lifecycleScope.launch { }
     }
-
 
 }

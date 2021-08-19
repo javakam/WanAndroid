@@ -2,6 +2,7 @@ package com.ando.wo.db
 
 import androidx.room.*
 import com.ando.wo.bean.WxArticleTabsEntity
+import kotlinx.coroutines.flow.Flow
 
 /**
  * @author javakam
@@ -14,26 +15,21 @@ interface WanAndroidDao {
     //BUG: https://stackoverflow.com/questions/48694449/error-with-room-dao-class-when-using-kotlin-coroutines
 
     @Query("select * from t_article_tabs order by tabId asc")
-    suspend fun getAll(): List<WxArticleTabsEntity>?
+    fun getAll(): Flow<List<WxArticleTabsEntity>?>
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    suspend fun add(tab: WxArticleTabsEntity)
+    fun add(tab: WxArticleTabsEntity)
 
     @Query("select * from t_article_tabs where tabId in (:tabIds)")
-    suspend fun loadAllByIds(tabIds: IntArray): List<WxArticleTabsEntity>?
+    fun loadAllByIds(tabIds: IntArray): Flow<List<WxArticleTabsEntity>?>
 
     @Query("select * from t_article_tabs where tabName like :tabName limit 1")
-    suspend fun findByName(tabName: String): WxArticleTabsEntity?
+    fun findByName(tabName: String): Flow<WxArticleTabsEntity?>
 
     @Query("delete from t_article_tabs")
-    suspend fun deleteAll()
+    fun deleteAll()
 
     @Delete
-    suspend fun delete(tab: WxArticleTabsEntity)
-
-
-    //Article
-//    @Query("select * from t_article_tabs order by tabId asc")
-//    suspend fun getAll(): List<Article>?
+    fun delete(tab: WxArticleTabsEntity)
 
 }

@@ -1,14 +1,12 @@
 package com.ando.wo.ui.wechat
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -18,7 +16,6 @@ import com.ando.wo.databinding.FragmentWxArticleDetailsBinding
 import com.ando.wo.ui.WanAndroidViewModel
 import com.ando.wo.utils.InjectorUtil
 import kotlinx.coroutines.Job
-
 
 /**
  * Title: WxArticleDetailFragment
@@ -35,14 +32,14 @@ class WxArticleDetailFragment : Fragment() {
     }
 
     private lateinit var binding: FragmentWxArticleDetailsBinding
-    private val args: WxArticleDetailFragmentArgs by navArgs<WxArticleDetailFragmentArgs>()
+    private val args: WxArticleDetailFragmentArgs by navArgs()
     private var jobWxArticleDetail: Job? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentWxArticleDetailsBinding.inflate(inflater, container, false)
         binding.lifecycleOwner = this
 
@@ -107,7 +104,7 @@ class WxArticleDetailFragment : Fragment() {
 
     private fun subscribeUi(adapter: WxArticleDetailsAdapter) {
 
-        viewModel.wxArticleDetails.observe(viewLifecycleOwner, Observer {
+        viewModel.wxArticleDetails.observe(viewLifecycleOwner, {
             binding.hasArticles = !it.isNullOrEmpty()
 
             Toast.makeText(requireActivity(), "第 $mPageNumber 页数据加载完成", Toast.LENGTH_SHORT).show()
@@ -126,7 +123,6 @@ class WxArticleDetailFragment : Fragment() {
 
             }
         })
-
 
     }
 

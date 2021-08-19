@@ -1,7 +1,6 @@
 package com.ando.wo.db
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.asLiveData
 import com.ando.wo.base.IRepository
 import com.ando.wo.bean.Article
 import com.ando.wo.bean.WxArticleTabsEntity
@@ -24,7 +23,7 @@ class WanAndroidRepository private constructor(
         }
 
     suspend fun getAllArticleTabs(): List<WxArticleTabsEntity>? {
-        var tabs: List<WxArticleTabsEntity>? = wanAndroidDao.getAll()
+        var tabs: List<WxArticleTabsEntity>? = wanAndroidDao.getAll().asLiveData().value
         if (tabs.isNullOrEmpty()) tabs = requestAllArticleTabs()
         return tabs
     }
