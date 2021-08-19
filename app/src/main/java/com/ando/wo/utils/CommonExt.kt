@@ -2,14 +2,8 @@ package com.ando.wo.utils
 
 import android.content.res.Resources
 import android.util.TypedValue
-import androidx.recyclerview.widget.ListAdapter
-import androidx.recyclerview.widget.RecyclerView
 
 /**
- * Title:
- * <p>
- * Description:
- * </p>
  * @author javakam
  * @date 2020/8/17  15:06
  */

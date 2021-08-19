@@ -9,5 +9,4 @@ package com.ando.wo.utils
  * @date 2020/8/18  10:10
  */
 
-
 const val DATABASE_NAME = "wan_db"

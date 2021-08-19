@@ -14,10 +14,6 @@ import com.ando.wo.utils.setClipDate
 import com.ando.wo.utils.toArticleListFragment
 
 /**
- * Title: WxArticleTabsAdapter
- * <p>
- * Description:
- * </p>
  * @author javakam
  * @date 2020/8/14  16:25
  */

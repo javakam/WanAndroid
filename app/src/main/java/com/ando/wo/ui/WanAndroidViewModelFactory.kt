@@ -5,10 +5,6 @@ import androidx.lifecycle.ViewModelProvider
 import com.ando.wo.db.WanAndroidRepository
 
 /**
- * Title: WanAndroidViewModelFactory
- * <p>
- * Description:
- * </p>
  * @author javakam
  * @date 2020/8/14  10:27
  */

@@ -11,15 +11,17 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         //Note : import androidx.databinding.DataBindingUtil.setContentView
-        setContentView<ActivityMainBinding>(this,
-            R.layout.activity_main
+        setContentView<ActivityMainBinding>(
+            this, R.layout.activity_main
         )
 
-
-        //
 //        supportFragmentManager.beginTransaction()
 //            .add(R.id.fl_main_container, WxArticleFragment(), "wx_article_tabs")
 //            .commitAllowingStateLoss()
 
+    }
+
+    fun handleActionBar(show: Boolean) {
+        if (show) supportActionBar?.show() else supportActionBar?.hide()
     }
 }

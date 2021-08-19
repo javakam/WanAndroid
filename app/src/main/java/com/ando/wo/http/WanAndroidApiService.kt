@@ -7,13 +7,8 @@ import com.ando.wo.bean.WxArticleTabsEntity
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Path
-import retrofit2.http.Query
 
 /**
- * Title:
- * <p>
- * Description:
- * </p>
  * @author javakam
  * @date 2020/8/13  16:05
  */

@@ -12,10 +12,6 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 
 /**
- * Title: WanAndroidViewModel
- * <p>
- * Description:
- * </p>
  * @author javakam
  * @date 2020/8/14  10:27
  */

@@ -7,10 +7,6 @@ import com.ando.wo.ui.wechat.WxArticleDetailFragmentDirections
 import com.ando.wo.ui.wechat.WxArticleTabsFragmentDirections
 
 /**
- * Title: AppRouter
- * <p>
- * Description:
- * </p>
  * @author javakam
  * @date 2020/8/17  9:47
  */

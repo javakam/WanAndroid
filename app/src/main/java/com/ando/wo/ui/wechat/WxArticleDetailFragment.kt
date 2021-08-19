@@ -18,10 +18,6 @@ import com.ando.wo.utils.InjectorUtil
 import kotlinx.coroutines.Job
 
 /**
- * Title: WxArticleDetailFragment
- * <p>
- * Description:
- * </p>
  * @author javakam
  * @date 2020/8/17  10:24
  */
@@ -106,7 +102,6 @@ class WxArticleDetailFragment : Fragment() {
 
         viewModel.wxArticleDetails.observe(viewLifecycleOwner, {
             binding.hasArticles = !it.isNullOrEmpty()
-
             Toast.makeText(requireActivity(), "第 $mPageNumber 页数据加载完成", Toast.LENGTH_SHORT).show()
 
             if (mPageNumber != 1) {
@@ -120,10 +115,8 @@ class WxArticleDetailFragment : Fragment() {
             } else {
                 if (binding.swipeRefresh.isRefreshing) binding.swipeRefresh.isRefreshing = false
                 adapter.submitList(it)
-
             }
         })
-
     }
 
 }

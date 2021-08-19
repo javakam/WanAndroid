@@ -4,15 +4,17 @@ import android.view.View
 import android.widget.ImageView
 import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 
 @BindingAdapter("loadPic")
 fun ImageView.loadPic(url: String?) {
-    if (url != null) Glide.with(context).load(url).into(this)
+    if (url != null) Glide.with(context).load(url).centerCrop()
+        .diskCacheStrategy(DiskCacheStrategy.ALL).into(this)
 }
 
 @BindingAdapter("isGone")
 fun isGone(view: View, isGone: Boolean) {
-    view.visibility = if (isGone) View.GONE else  View.VISIBLE
+    view.visibility = if (isGone) View.GONE else View.VISIBLE
 }
 
 //@BindingAdapter("bind:colorSchemeResources")
