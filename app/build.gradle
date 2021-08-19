@@ -16,14 +16,27 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-
         vectorDrawables.useSupportLibrary true
+    }
+
+    signingConfigs {
+        release {
+            storeFile file("wo.jks")
+            storePassword "wo2021"
+            keyAlias "wo"
+            keyPassword "wo2021"
+            v1SigningEnabled true
+            v2SigningEnabled true
+        }
     }
 
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true
+            zipAlignEnabled true
+            shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
         }
     }
 
