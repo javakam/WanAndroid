@@ -40,10 +40,6 @@ android {
         }
     }
 
-    packagingOptions {
-        exclude 'META-INF/atomicfu.kotlin_module'
-    }
-
     kotlinOptions {
         // work-runtime-ktx 2.1.0 and above now requires Java 8
         jvmTarget = "1.8"
@@ -65,6 +61,30 @@ android {
         dataBinding true
     }
 
+    android.applicationVariants.all { variant ->
+        variant.outputs.all {
+            def buildType = variant.getBuildType().getName()
+            def releaseTime = new Date().format("yyyyMMddHHmmss", TimeZone.getTimeZone("GMT+08:00"))
+            outputFileName = "wo_v${defaultConfig.versionName}_${releaseTime}_${buildType}.apk"
+        }
+    }
+
+    packagingOptions {
+        exclude 'META-INF/*.kotlin_module'
+
+        exclude 'META-INF/rxjava.properties'
+        exclude 'META-INF/DEPENDENCIES.txt'
+        exclude 'META-INF/LICENSE.txt'
+        exclude 'META-INF/NOTICE.txt'
+        exclude 'META-INF/NOTICE'
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/DEPENDENCIES'
+        exclude 'META-INF/notice.txt'
+        exclude 'META-INF/license.txt'
+        exclude 'META-INF/dependencies.txt'
+        exclude 'META-INF/LGPL2.1'
+        exclude 'META-INF/atomicfu.kotlin_module'
+    }
 }
 
 dependencies {
